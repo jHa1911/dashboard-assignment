@@ -37,7 +37,7 @@ function WidgetCard({
             </div>
 
             <p className="widget-content">
-                {widget.text}
+                {widget.description}
             </p>
         </div>
     );

@@ -22,7 +22,7 @@ function AddWidgetModal({
 
     const [title, setTitle] = useState("");
 
-    const [text, setText] = useState("");
+    const [description, setDescription] = useState("");
 
     const handleSubmit = () => {
         if (!title.trim()) return;
@@ -30,7 +30,8 @@ function AddWidgetModal({
         addWidget(selectedCategory, {
             id: uuid(),
             title,
-            text,
+            description,
+            type: "text",
         });
 
         onClose();
@@ -102,10 +103,10 @@ function AddWidgetModal({
                 />
 
                 <textarea
-                    placeholder="Widget Text"
-                    value={text}
+                    placeholder="Widget Description"
+                    value={description}
                     onChange={(e) =>
-                        setText(e.target.value)
+                        setDescription(e.target.value)
                     }
                     style={{
                         width: "100%",
