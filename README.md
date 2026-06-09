@@ -4,6 +4,9 @@ A dynamic dashboard application built with React, TypeScript, and Zustand — cr
 
 ![Dashboard Preview](./screenshot/Screenshot.png)
 
+## Live Demo:
+https://dashboard-assignment-gamma-lovat.vercel.app/
+
 ## Features
 
 - **Dynamic widgets** — widgets are driven by a JSON data structure; no hardcoded JSX
