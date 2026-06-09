@@ -1,73 +1,100 @@
-# React + TypeScript + Vite
+# CNAPP Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dynamic dashboard application built with React, TypeScript, and Zustand — created as part of the Frontend Trainee Assignment.
 
-Currently, two official plugins are available:
+![Dashboard Preview](./screenshot/Screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+> Add your deployment link here (e.g. https://dashboard-assignment.vercel.app)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- **Dynamic widgets** — widgets are driven by a JSON data structure; no hardcoded JSX
+- **Add widgets** — click "+ Add Widget" on any category row or the top header button to open the modal
+- **Remove widgets** — click the ✕ icon on any widget card to remove it from its category
+- **Category tabs in modal** — the Add Widget modal organises widgets by category (CSPM, CWPP, Image) with checkbox toggles
+- **Search** — search across all widgets from both the dashboard header and inside the modal
+- **Persistent state** — widget additions and removals survive page refresh via Zustand + localStorage
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React 18 + TypeScript
+- Zustand (state management)
+- Recharts (donut charts)
+- Vite (build tool)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
+
+- Node.js v18 or above
+- npm v9 or above
+
+### Installation & Running Locally
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/jHa1911/dashboard-assignment.git
+
+# 2. Navigate into the project
+cd dashboard-assignment
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app will be running at `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Build for Production
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
 ```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Dashboard.tsx          # Main layout, top bar, search
+│   ├── CategorySection.tsx    # Renders each category + its widgets grid
+│   ├── WidgetCard.tsx         # Individual widget card with remove button
+│   ├── AddWidgetModal.tsx     # Slide-in modal with tabs, search, checkboxes
+│   ├── DonutWidget.tsx        # Pie/donut chart widget (Recharts)
+│   ├── ProgressWidget.tsx     # Multi-segment progress bar widget
+│   └── EmptyWidget.tsx        # Empty state widget (no data available)
+├── data/
+│   └── dashboardData.ts       # JSON source of all categories and widgets
+├── store/
+│   └── dashboardStore.ts      # Zustand store — addWidget / removeWidget
+├── styles/
+│   └── dashboard.css          # All component styles
+└── types/
+    └── dashboard.ts           # TypeScript interfaces for Widget and Category
+```
+
+## How the JSON Structure Works
+
+Categories and widgets are defined in `src/data/dashboardData.ts`. Each category contains an array of widgets:
+
+```json
+{
+  "id": "cspm",
+  "title": "CSPM Executive Dashboard",
+  "widgets": [
+    {
+      "id": "w1",
+      "title": "Cloud Accounts",
+      "type": "donut",
+      "description": "2 Total",
+      "data": { ... }
+    }
+  ]
+}
+```
+
+To add a new default widget, add an entry to the relevant category's `widgets` array in `dashboardData.ts`.
