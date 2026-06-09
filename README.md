@@ -4,10 +4,6 @@ A dynamic dashboard application built with React, TypeScript, and Zustand — cr
 
 ![Dashboard Preview](./screenshot/Screenshot.png)
 
-## Live Demo
-
-> Add your deployment link here (e.g. https://dashboard-assignment.vercel.app)
-
 ## Features
 
 - **Dynamic widgets** — widgets are driven by a JSON data structure; no hardcoded JSX
