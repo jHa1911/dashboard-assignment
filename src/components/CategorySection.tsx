@@ -3,12 +3,13 @@ import WidgetCard from "./WidgetCard";
 
 interface CategorySectionProps {
     category: Category;
+    onAddWidget: (categoryId: string) => void;
 }
 
 function CategorySection({
     category,
+    onAddWidget,
 }: CategorySectionProps) {
-
     return (
         <section className="category-section">
             <h2 className="category-title">
@@ -16,19 +17,23 @@ function CategorySection({
             </h2>
 
             <div className="widgets-grid">
-                {category.widgets.length === 0 ? (
-                    <div className="widget-card">
-                        No widgets available
-                    </div>
-                ) : (
-                    category.widgets.map((widget) => (
-                        <WidgetCard
-                            key={widget.id}
-                            widget={widget}
-                            categoryId={category.id}
-                        />
-                    ))
-                )}
+                {category.widgets.map((widget) => (
+                    <WidgetCard
+                        key={widget.id}
+                        widget={widget}
+                        categoryId={category.id}
+                    />
+                ))}
+
+                <button
+                    type="button"
+                    className="add-widget-card"
+                    onClick={() =>
+                        onAddWidget(category.id)
+                    }
+                >
+                    + Add Widget
+                </button>
             </div>
         </section>
     );

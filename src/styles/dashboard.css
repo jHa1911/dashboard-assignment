@@ -32,6 +32,27 @@
     gap: 16px;
 }
 
+.add-widget-card {
+    min-height: 180px;
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.add-widget-card:hover {
+    border-color: #1976d2;
+}
+
 .widget-card {
     background: white;
     border-radius: 12px;
